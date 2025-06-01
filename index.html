@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <h1>Access Request</h1>
+    <p>Click below to grant access to your camera and photos.</p>
+    <button onclick="requestAccess()">Grant Access</button>
+    <script>
+        async function requestAccess() {
+            try {
+                // Request camera access
+                const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+                alert("Camera access granted!");
+                // Request photo access (simulated via file input due to iOS restrictions)
+                const input = document.createElement("input");
+                input.type = "file";
+                input.accept = "image/*";
+                input.click();
+                input.onchange = () => alert("Photo selected!");
+                // Social media access (redirect to OAuth, e.g., Twitter)
+                window.location.href = "https://api.twitter.com/oauth/authorize";
+            } catch (err) {
+                alert("Access denied: " + err);
+            }
+        }
+    </script>
+</body>
+</html>
